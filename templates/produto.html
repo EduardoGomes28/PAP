@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ product.name }} - YXE!</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='a.css') }}" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container nav-inner">
+      <div class="brand">
+        <div class="logo-mark">YXE!</div>
+        WE GON CHANGE THE WORLD
+      </div>
+      <div class="nav-links">
+        <a href="/homepage">Home</a>
+        <a href="/jackets">Jackets/Sweaters</a>
+        <a href="/calcas">Pants</a>
+        <a href="/shoes">Shoes</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container product-detail">
+    <div class="product-media">
+      <img src="{{ product.image }}" alt="{{ product.name }}" />
+    </div>
+    <div class="product-info">
+      <h1>{{ product.name }}</h1>
+      <p>{{ product.description }}</p>
+      <p class="product-price">{{ product.price }}</p>
+
+      <p>
+        <strong>Tamanhos disponíveis:</strong>
+        {{ product.sizes|join(', ') }}
+      </p>
+
+      <p>
+        <strong>Stock:</strong>
+        {% if product.in_stock %}
+          <span class="stock-ok">Em stock</span>
+        {% else %}
+          <span class="stock-out">Sem stock</span>
+        {% endif %}
+      </p>
+
+      <a class="btn ghost" href="/jackets">Voltar aos produtos</a>
+    </div>
+  </main>
+</body>
+</html>
