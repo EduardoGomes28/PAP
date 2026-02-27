@@ -1,12 +1,11 @@
 from flask import Flask, render_template, request, redirect, session
-from flask import session
-from flask import Flask, render_template, request, redirect
+import json
 import sqlite3
-import sqlite3
-import os
 
 app = Flask(__name__)
 app.secret_key = 'chave-super-secreta'
+
+STORE_DB = "loja.db"
 
 
 def init_db():
@@ -20,13 +19,70 @@ def init_db():
         ''')
 init_db()
 
+
+def _row_to_product(row):
+    return {
+        "slug": row["slug"],
+        "name": row["name"],
+        "description": row["description"],
+        "price": row["price"],
+        "badge": row["badge"],
+        "image": row["image"],
+        "sizes": json.loads(row["sizes"]) if row["sizes"] else [],
+        "in_stock": bool(row["in_stock"]),
+    }
+
+
+def init_products_db():
+    with sqlite3.connect(STORE_DB) as conn:
+        conn.execute(
+            """
+            CREATE TABLE IF NOT EXISTS products (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                slug TEXT NOT NULL UNIQUE,
+                category TEXT NOT NULL,
+                name TEXT NOT NULL,
+                description TEXT NOT NULL,
+                price TEXT NOT NULL,
+                badge TEXT NOT NULL DEFAULT '',
+                image TEXT NOT NULL,
+                sizes TEXT NOT NULL,
+                in_stock INTEGER NOT NULL DEFAULT 1
+            )
+            """
+        )
+
+def get_products_by_category(category):
+    with sqlite3.connect(STORE_DB) as conn:
+        conn.row_factory = sqlite3.Row
+        rows = conn.execute(
+            "SELECT slug, name, description, price, badge, image, sizes, in_stock FROM products WHERE category = ? ORDER BY id",
+            (category,),
+        ).fetchall()
+    return [_row_to_product(row) for row in rows]
+
+
+def get_product_by_slug(slug):
+    with sqlite3.connect(STORE_DB) as conn:
+        conn.row_factory = sqlite3.Row
+        row = conn.execute(
+            "SELECT slug, name, description, price, badge, image, sizes, in_stock FROM products WHERE slug = ?",
+            (slug,),
+        ).fetchone()
+    if row is None:
+        return None
+    return _row_to_product(row)
+
+
+init_products_db()
+
 @app.route('/')
 def index():
-    return redirect('/splash')
+    return redirect('/intro')
 
-@app.route('/splash')
+@app.route('/intro')
 def splash():
-    return render_template('splash.html')
+    return render_template('intro.html')
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -73,30 +129,11 @@ def login():
 
     return render_template('login.html')  
 
-
 @app.route('/homepage')
-def idea():
+def homepage():
     if 'username' not in session:
         return redirect('/login')
     return render_template("homepage.html", username=session['username'])
-
-
-@app.route('/novidades')
-def novidades():
-    return render_template("novidades.html")
-
-@app.route('/coleções')
-def colecoes():
-    return render_template("colecoes.html")
-
-@app.route('/drops')
-def drops():
-    return render_template("drops.html")
-
-@app.route('/contato')
-def contato():
-    return render_template("contato.html")
-
 
 @app.route('/logout')
 def logout():
@@ -104,5 +141,30 @@ def logout():
     return redirect('/login')
 
 
+@app.route('/jackets')
+def jackets():
+    return render_template("js.html", products=get_products_by_category("jackets"))
+
+
+@app.route('/produto/<slug>')
+def produto_detalhe(slug):
+    product = get_product_by_slug(slug)
+    if product is None:
+        return "Produto não encontrado", 404
+    return render_template("produto.html", product=product)
+
+@app.route('/shoes')
+def shoes():
+    return render_template("shoes.html", products=get_products_by_category("shoes"))
+
+@app.route('/calcas')
+def contato():
+    return render_template("calças.html", products=get_products_by_category("pants"))
+
+
 if __name__ == '__main__':
     app.run(debug=True)
+
+ 
+
+
