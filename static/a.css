@@ -1,20 +1,22 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;600;800&display=swap');
+
 
 :root{
   
-  --bg: #0f0f0f;           
-  --panel: #121212;         
-  --muted: #bdb6a6;         
-  --accent: #ff0000;        
-  --accent-2: #c9a66b;     
-  --danger: #d64545;        
-  --glass: rgba(255,255,255,0.04);
+  --bg: #000000;            /* background preto*/
+  --panel: #000000;         /* painel preto */
+  --muted: #ffffff;         /* branco para texto */
+  --accent: #000000;        /* preto para a cor do destaque */
+  --accent-2: #ffffff;      /* branco para variação de destaques*/
+  --danger: #ffffff;        /* branco para badges */
+  --glass: rgb(0, 0, 0);
 
-  
+  /* tipo de letra */
   --font-sans: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   --font-display: 'Anton', var(--font-sans);
 
- 
+  /* medidas */
   --container-max: 1200px;
   --radius: 12px;
   --radius-sm: 6px;
@@ -22,14 +24,14 @@
   --transition: 200ms cubic-bezier(.2,.9,.3,1);
 }
 
-
+/*  Reset e base  */
 *{box-sizing:border-box}
 html,body,#root{height:100%}
 body{
   margin:0;
   font-family:var(--font-sans);
-  background:linear-gradient(180deg,var(--bg), #070707);
-  color: #eae7e1;
+  background:linear-gradient(180deg,var(--bg), #000000);
+  color: #ffffff;
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
   line-height:1.45;
@@ -37,11 +39,11 @@ body{
   letter-spacing:0.2px;
 }
 
-
+/* anchor reset */
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block;height:auto}
 
-
+/* container */
 .container{
   width:100%;
   max-width:var(--container-max);
@@ -49,13 +51,13 @@ img{max-width:100%;display:block;height:auto}
   padding:0 1rem;
 }
 
-
+/* barra de navegação  */
 .navbar{
   position:sticky;
   top:0;
   z-index:60;
   backdrop-filter: blur(6px);
-  background: linear-gradient(180deg, rgba(10,10,10,0.85), rgba(10,10,10,0.6));
+  background: linear-gradient(180deg, rgb(0, 0, 0), rgb(10, 10, 10));
   box-shadow: 0 6px 18px rgba(0,0,0,0.6);
   border-bottom: 1px solid rgba(255,255,255,0.03);
 }
@@ -83,12 +85,12 @@ img{max-width:100%;display:block;height:auto}
   background:linear-gradient(135deg,var(--accent),var(--accent-2));
   display:grid;
   place-items:center;
-  color:#07120a;
+  color:#000000;
   font-weight:800;
   box-shadow:0 6px 18px rgba(0,0,0,0.6);
 }
 
-
+/* links de navegação */
 .nav-links{
   display:flex;
   gap:1.25rem;
@@ -104,7 +106,7 @@ img{max-width:100%;display:block;height:auto}
 }
 .nav-links a:hover{ color: white; transform:translateY(-2px) }
 
-
+/* Hero  */
 .hero{
   display:flex;
   align-items:center;
@@ -132,7 +134,7 @@ img{max-width:100%;display:block;height:auto}
   margin-bottom:1.25rem;
 }
 
-
+/* butões*/
 .cta-row{ display:flex; gap:1rem; align-items:center }
 .btn{
   display:inline-flex;
@@ -156,7 +158,7 @@ img{max-width:100%;display:block;height:auto}
 }
 .btn:hover{ transform:translateY(-3px); box-shadow:0 10px 20px rgba(0,0,0,0.6) }
 
-
+/* hero image / visual */
 .hero .hero-right{
   flex:0 0 420px;
   display:grid;
@@ -173,7 +175,7 @@ img{max-width:100%;display:block;height:auto}
   box-shadow:0 12px 40px rgba(0,0,0,0.6);
 }
 
-
+/* Produtos  */
 .products{
   padding:3rem 0;
 }
@@ -201,6 +203,9 @@ img{max-width:100%;display:block;height:auto}
   transform:translateY(-6px);
   box-shadow:0 20px 40px rgba(0,0,0,0.6);
 }
+.card-link{
+  display:block;
+}
 .card .media{
   height:220px;
   border-radius:10px;
@@ -225,7 +230,7 @@ img{max-width:100%;display:block;height:auto}
   color:var(--muted);
 }
 
-
+/* preço */
 .price-row{
   display:flex;
   align-items:center;
@@ -236,11 +241,11 @@ img{max-width:100%;display:block;height:auto}
 .price{
   font-weight:800;
   letter-spacing:0.4px;
-  color:#fff;
+  color:#ffffff;
 }
 .badge{
   background:var(--danger);
-  color:white;
+  color:rgb(0, 0, 0);
   font-weight:700;
   padding:0.25rem 0.5rem;
   border-radius:6px;
@@ -248,7 +253,7 @@ img{max-width:100%;display:block;height:auto}
   text-transform:uppercase;
 }
 
-
+/* efeito estencil  */
 .stencil{
   font-family:var(--font-sans);
   font-weight:800;
@@ -262,17 +267,17 @@ img{max-width:100%;display:block;height:auto}
   border:1px dashed rgba(255,255,255,0.03);
 }
 
-
+/* linha separadora */
 .rule{
   height:1px;
   background:linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent);
   margin:1rem 0;
 }
 
-
+/* rodapé*/
 .site-footer{
   padding:2.25rem 0;
-  border-top:1px solid rgba(255,255,255,0.03);
+  border-top:1px solid rgb(255, 255, 255);
   color:var(--muted);
   font-size:0.95rem;
 }
@@ -283,7 +288,7 @@ img{max-width:100%;display:block;height:auto}
 }
 .site-footer a{ color:var(--muted); opacity:0.9 }
 
-
+/*  componenentes pequenos */
 .kv-small{
   font-family:var(--font-display);
   font-size:1rem;
@@ -292,13 +297,13 @@ img{max-width:100%;display:block;height:auto}
   color:var(--muted);
 }
 
-
+/* classes reeutilizaveis */
 .flex{display:flex}
 .center{display:grid;place-items:center}
 .hide-sm{display:block}
 @media (max-width:720px){ .hide-sm{ display:none } }
 
-
+/* animações  */
 @keyframes float {
   0%{ transform:translateY(0) }
   50%{ transform:translateY(-6px) }
@@ -306,15 +311,54 @@ img{max-width:100%;display:block;height:auto}
 }
 .float-slow{ animation: float 6s ease-in-out infinite }
 
-
+/* acessibilidade*/
 :focus{ outline: 3px solid rgba(138,163,106,0.18); outline-offset:3px; transition:none }
+
 
 
 .small-strong{ font-weight:700; color:#fff }
 
-
+/* ajuda do layout */
 .row{ display:flex; gap:var(--gap); align-items:center; justify-content:space-between }
 .col{ display:flex; flex-direction:column; gap:0.6rem }
 
+/* fim do ficheiro  */
 
+.product-detail{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:2rem;
+  padding:3rem 1rem;
+}
+.product-media{
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:12px;
+  overflow:hidden;
+  background:#111;
+}
+.product-media img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.product-info h1{
+  margin:0 0 0.75rem 0;
+}
+.product-price{
+  font-size:1.4rem;
+  font-weight:800;
+}
+.stock-ok{
+  color:#7CFC00;
+  font-weight:700;
+}
+.stock-out{
+  color:#ff5c5c;
+  font-weight:700;
+}
+@media (max-width:780px){
+  .product-detail{
+    grid-template-columns:1fr;
+  }
+}
 
