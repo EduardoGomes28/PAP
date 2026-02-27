@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YXE! Jackets/Sweaters</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='a.css') }}" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container nav-inner">
+      <div class="brand">
+        <div class="logo-mark">YXE!</div>
+        WE GON CHANGE THE WORLD
+      </div>
+
+      <div class="nav-links">
+        <a href="/jackets">Jackets/Sweaters</a>
+        <a href="/calcas">Pants</a>
+        <a href="/shoes">Shoes</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="products">
+    <div class="container">
+      <div class="grid">
+        {% for product in products %}
+          <a class="card-link" href="{{ url_for('produto_detalhe', slug=product.slug) }}">
+            <div class="card">
+              <div class="media">
+                <img src="{{ product.image }}" alt="{{ product.name }}" />
+              </div>
+              <h4>{{ product.name }}</h4>
+              <p>{{ product.description }}</p>
+              <div class="price-row">
+                <span class="price">{{ product.price }}</span>
+                {% if product.badge %}
+                  <span class="badge">{{ product.badge }}</span>
+                {% endif %}
+              </div>
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="cols">
+        <div>
+          <strong>Online Store</strong><br>
+          YXE! We gon change the world  © 2025
+        </div>
+        <div>
+          <a href="#">Política de Privacidade</a><br>
+          <a href="#">Termos de Uso</a>
+        </div>
+        <div>
+          <a href="#">Instagram</a><br>
+          <a href="#">Twitter</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
+
+
