@@ -1,6 +1,6 @@
 # 📦 PAP --- Projeto Final de Curso
 
-Este repositório contém o **Projeto Final de Curso** denominado **PAP**,
+Este repositório contém o **Projeto Final de Curso** denominado **YXE!**,
 desenvolvido por *Eduardo Gomes*.\
 O objetivo principal deste projeto é criar uma aplicação funcional que
 inclui um sistema de loja com autenticação de utilizadores e gestão de
@@ -10,7 +10,7 @@ dados.
 
 ## 🧠 Sobre o Projeto
 
-O **PAP** é uma aplicação que integra funcionalidades de acesso de
+O **YXE!** é uma aplicação que integra funcionalidades de acesso de
 utilizador e operações básicas de loja.\
 O projeto inclui um backend em Python e uma interface em HTML/CSS,
 demonstrando conhecimentos de desenvolvimento web e integração com bases
